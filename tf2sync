@@ -1,0 +1,45 @@
+#!/bin/zsh
+STEAM_SN_FILE="steam_username.txt"
+
+if [ ! -f $STEAM_SN_FILE ];
+then
+	echo "The file '$STEAM_SN_FILE' should exist in the current directory in order to sync the customizations."
+	return 1;
+fi
+
+echo "Beginning syncing to TF2 directory..."
+STEAM_USERNAME=$(<steam_username.txt)
+echo "Successfully read $STEAM_SN_FILE file. Syncing for user '$STEAM_USERNAME'..."
+
+TF2_CONTENT_PATH="/Users/$USER/Library/Application Support/Steam/SteamApps/$STEAM_USERNAME/team fortress 2/tf"
+
+if [ ! -d $TF2_CONTENT_PATH ]
+then
+	echo "TF2 path '$TF2_CONTENT_PATH' does not exist; the sync operation cannot be performed."
+	return 1;
+fi
+echo "Syncing to '$TF2_CONTENT_PATH'..."
+
+RESOURCE_PATH_SOURCE="HUD/resource"
+RESOURCE_PATH_TARGET="$TF2_CONTENT_PATH/resource"
+
+SCRIPT_PATH_SOURCE="HUD/scripts"
+SCRIPT_PATH_TARGET="$TF2_CONTENT_PATH/scripts"
+
+CONFIG_PATH_SOURCE="Configs/cfg"
+CONFIG_PATH_TARGET="$TF2_CONTENT_PATH/cfg"
+
+echo "Syncing HUDs from: '$RESOURCE_PATH_SOURCE' to: '$RESOURCE_PATH_TARGET'..."
+cp -r $RESOURCE_PATH_SOURCE/* $RESOURCE_PATH_TARGET
+echo "Syncing HUDs from: '$RESOURCE_PATH_SOURCE' to: '$RESOURCE_PATH_TARGET' complete."
+
+echo "Syncing HUDs from: '$SCRIPT_PATH_SOURCE' to: '$SCRIPT_PATH_TARGET'..."
+cp -r $SCRIPT_PATH_SOURCE/* $SCRIPT_PATH_TARGET
+echo "Syncing HUDs from: '$SCRIPT_PATH_SOURCE' to: '$SCRIPT_PATH_TARGET' complete."
+
+echo "Syncing HUDs from: '$CONFIG_PATH_SOURCE' to: '$CONFIG_PATH_TARGET'..."
+cp -r $CONFIG_PATH_SOURCE/* $CONFIG_PATH_TARGET
+echo "Syncing HUDs from: '$CONFIG_PATH_SOURCE' to: '$CONFIG_PATH_TARGET' complete."
+
+echo "Successful sync."
+return 0;

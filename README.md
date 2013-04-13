@@ -20,6 +20,6 @@ Run `tf2sync` to update the files in your directory with the ones provided in th
 
 # References
 
-Team Fortress 2: http://www.teamfortress.com/
-eve-tf2hud: https://code.google.com/p/eve-tf2hud/
-The GitHub page: https://github.com/skaushik92/tf2-customizations/
++ Team Fortress 2: http://www.teamfortress.com/
++ eve-tf2hud: https://code.google.com/p/eve-tf2hud/
++ The GitHub page: https://github.com/skaushik92/tf2-customizations/

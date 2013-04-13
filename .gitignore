@@ -1,0 +1,5 @@
+# Ignoring Mac auto-generated files
+*.DS_Store
+
+# Ignoring private information
+steam_username.txt

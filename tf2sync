@@ -1,5 +1,8 @@
 #!/bin/zsh
+
+# Global variables
 STEAM_SN_FILE="steam_username.txt"
+SHOULD_CREATE_LINK=true
 
 if [ ! -f $STEAM_SN_FILE ];
 then
@@ -13,11 +16,18 @@ echo "Successfully read $STEAM_SN_FILE file. Syncing for user '$STEAM_USERNAME'.
 
 TF2_CONTENT_PATH="/Users/$USER/Library/Application Support/Steam/SteamApps/$STEAM_USERNAME/team fortress 2/tf"
 
-if [ ! -d $TF2_CONTENT_PATH ]
+if [ ! -d $TF2_CONTENT_PATH ];
 then
 	echo "TF2 path '$TF2_CONTENT_PATH' does not exist; the sync operation cannot be performed."
 	return 1;
 fi
+
+if [ $SHOULD_CREATE_LINK ];
+then
+	echo "Creating sym-link to '$TF2_CONTENT_PATH'."
+	ln -s "TF2_CONTENT_PATH" "tf2directory"
+fi
+
 echo "Syncing to '$TF2_CONTENT_PATH'..."
 
 RESOURCE_PATH_SOURCE="HUD/resource"
